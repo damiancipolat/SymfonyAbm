@@ -1,0 +1,11 @@
+san_jorge_clientes:
+    pattern:  /clientes/{mode}/{id}
+    defaults: { _controller: SanJorgeBundle:Clientes:index }
+
+san_jorge_facturas:
+    pattern:  /facturas/{mode}/{id}
+    defaults: { _controller: SanJorgeBundle:Facturas:index }
+
+san_jorge_items:
+    pattern:  /items/{mode}/{id}
+    defaults: { _controller: SanJorgeBundle:Items:index }

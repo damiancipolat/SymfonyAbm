@@ -1,0 +1,171 @@
+{% extends "SanJorgeBundle:Default:layout.html.twig" %}
+{% block content %}
+
+<script language="javascript">
+
+	function borrar(url)
+	{
+		let r = confirm("¿Desea borrar este registro ?");
+
+		if (r==true)
+			window.location=url;
+	}
+
+	function validaEnviar(email)
+	{
+	  let expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      
+      return (expr.test(email));
+	}
+
+	$(document).ready(function()
+	{
+		$("#btn_enviar").click(function()
+		{
+			//Valido que todos los campos tengan datos.
+			if (($("#txt_nombre").val()!='')&&($("#txt_apellido").val()!='')&&($("#txt_dni").val()!='')&&
+				($("#txt_email").val()!='')&&($("#txt_dir").val()!='')&&($("#txt_tel").val()!=''))
+			{
+				//Valido el email.
+				if (validaEnviar($("#txt_email").val()))
+					$("#form_1").submit();
+				else
+					alert("Email incorrecto!");
+			}
+			else
+				alert("Complete todos los datos para poder continuar!");
+		});
+	});
+
+</script>
+
+<!--BORRAR-->
+{% if (mode=='del_ok') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_clientes',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-teal" style="text-align:center;background:#A0D6B4!important;">
+		  <h3>Cliente borrado con exito!</h3>
+		</div>
+	</div>
+{%  endif %}
+
+{% if (mode=='del_error') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_clientes',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-red" style="text-align:center;">
+		  <h3>Hubo un problema al borrar el cliente.</h3>
+		</div>
+	</div>
+{%  endif %}
+
+<!--EDITAR-->
+{% if (mode=='edit')%}
+	{% include 'SanJorgeBundle:Default:cliForm.html.twig' %}
+{%  endif %}
+
+{% if (mode=='edit_ok') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_clientes',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-teal" style="text-align:center;background:#A0D6B4!important;">
+		  <h3>Cliente guardado con exito!</h3>
+		</div>
+	</div>
+{%  endif %}
+
+{% if (mode=='edit_error') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_clientes',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-red" style="text-align:center;">
+		  <h3>Hubo un problema al editar el cliente.</h3>
+		</div>
+	</div>
+{%  endif %}
+
+<!--AGREGAR-->
+{% if (mode=='add')%}
+	{% include 'SanJorgeBundle:Default:cliForm.html.twig' %}
+{%  endif %}
+
+{% if (mode=='add_ok') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_clientes',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-teal" style="text-align:center;background:#A0D6B4!important;">
+		  <h3>Cliente creado con exito!</h3>
+		</div>
+	</div>
+{%  endif %}
+
+{% if (mode=='add_error') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_clientes',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-red" style="text-align:center;">
+		  <h3>Hubo un problema al cargar el cliente.</h3>
+		</div>
+	</div>
+{%  endif %}
+
+<!--LISTAR-->
+{% if (mode=='list') %}
+<div style="margin-top:10px;">
+	<a href="{{path('san_jorge_clientes',{'mode':'add','id':'0'})}}" class="link">
+		<button type="submit" class="w3-btn w3-padding w3-teal" style="width:120px">Agregar &rarr;</button></p>	
+	</a>		
+</div>
+<div style="margin-top:20px;">
+	<table>
+		<thead>
+			<tr>
+				<td>Nombre</td>
+				<td>Apellido</td>
+				<td>DNI</td>
+				<td>Email</td>
+				<td>Dirección</td>				
+				<td colspan="2">Acción</td>				
+			</tr>
+		</thead>
+		<tbody>
+    		{% for cliente in resu %}			
+			<tr class="celda">
+				<td>{{cliente.getNombre()}}</td>
+				<td>{{cliente.getApellido()}}</td>
+				<td>{{cliente.getDni()}}</td>
+				<td>{{cliente.getEmail()}}</td>
+				<td>{{cliente.getDireccion()}}</td>				
+				<td>
+					<a style="color:blue;" href="{{path('san_jorge_clientes',{'mode':'edit','id':cliente.getId()})}}" class="link">Edit</a>
+				</td>			
+				<td>
+					<a style="color:red;" href="javascript:borrar('{{path('san_jorge_clientes',{'mode':'del','id':cliente.getId()})}}');" class="link">X</a>
+				</td>					
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{%  endif %}
+
+{% endblock %}

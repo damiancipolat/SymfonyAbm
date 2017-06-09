@@ -1,0 +1,100 @@
+{% extends "SanJorgeBundle:Default:layout.html.twig" %}
+{% block content %}
+
+<!--AGREGAR-->
+{% if (mode=='add')%}
+	{% include 'SanJorgeBundle:Default:factForm.html.twig' %}
+{%  endif %}
+
+{% if (mode=='fac_ok') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_facturas',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-teal" style="text-align:center;">
+		  <h3>Factura creada correctamente.</h3>
+		</div>
+	</div>
+{%  endif %}
+
+{% if (mode=='fac_error') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_facturas',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-red" style="text-align:center;">
+		  <h3>Hubo un problema al cargar la factura.</h3>
+		</div>
+	</div>
+{%  endif %}
+
+<!--BORRAR-->
+{% if (mode=='del_ok') %}
+	<div style="margin-top:10px;">
+		<a href="{{path('san_jorge_facturas',{'mode':'list','id':'0'})}}" class="link">
+			<b>&larr; Volver</b>
+		</a>
+	</div>
+	<div style="margin-top:15px;">
+		<div class="w3-container w3-teal" style="text-align:center;background:#A0D6B4!important;">
+		  <h3>Factura borrada con exito!</h3>
+		</div>
+	</div>
+{%  endif %}
+
+<!--LISTAR-->
+{% if (mode=='list') %}
+
+<script language="javascript">
+
+	function borrar(url)
+	{
+		let r = confirm("¿Desea borrar este registro ?");
+
+		if (r==true)
+			window.location=url;
+	}
+
+</script>
+
+<div style="margin-top:10px;">
+	<a href="{{path('san_jorge_facturas',{'mode':'add','id':'0'})}}" class="link">
+		<button type="submit" class="w3-btn w3-padding w3-teal" style="width:120px">Agregar &rarr;</button></p>	
+	</a>		
+</div>
+<div style="margin-top:20px;">
+	<table>
+		<thead>
+			<tr>
+				<td>N° Factura</td>
+				<td>Fecha</td>
+				<td>Cliente</td>
+				<td>Total</td>
+				<td colspan="2">Acción</td>				
+			</tr>
+		</thead>
+		<tbody>
+    		{% for fact in facturas %}			
+			<tr class="celda">
+				<td>{{fact.factura.getId()}}</td>
+				<td>{{fact.factura.getFecha()|date("d/m/Y")}}</td>
+				<td>{{fact.cliente.getNombre()~' '~fact.cliente.getApellido()}}</td>
+				<td>$&nbsp;{{fact.total}}</td>
+				<td>
+					<a style="color:blue;" href="{{path('san_jorge_items',{'mode':'list','id':fact.factura.getId()})}}" class="link">Ver detalle</a>
+				</td>			
+				<td>
+					<a style="color:red;" href="javascript:borrar('{{path('san_jorge_facturas',{'mode':'del','id':fact.factura.getId()})}}');" class="link">X</a>
+				</td>					
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{%  endif %}
+
+{% endblock %}

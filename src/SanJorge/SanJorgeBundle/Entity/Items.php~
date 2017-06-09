@@ -1,0 +1,67 @@
+<?php
+
+namespace SanJorge\SanJorgeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Items
+ *
+ * @ORM\Table(name="items")
+ * @ORM\Entity
+ */
+class Items
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idfactura", type="bigint", nullable=true)
+     */
+    private $idfactura;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="producto", type="string", length=200, nullable=true)
+     */
+    private $producto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="cantidad", type="integer", nullable=true)
+     */
+    private $cantidad;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="costo_unitario", type="float", nullable=true)
+     */
+    private $costoUnitario;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="impuestos", type="float", nullable=true)
+     */
+    private $impuestos;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="costo_total", type="float", nullable=true)
+     */
+    private $costoTotal;
+
+
+}

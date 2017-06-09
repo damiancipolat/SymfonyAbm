@@ -1,0 +1,43 @@
+<div style="margin-top:10px;">
+	<a href="{{path('san_jorge_clientes',{'mode':'list','id':'0'})}}" class="link">
+		<b>&larr; Volver</b>
+	</a>
+</div>
+<div style="margin-top:15px;">
+	<div class="w3-container w3-teal">
+		{% if resu!=null %}
+			<h2>Editar cliente</h2>
+		{% else %}
+			<h2>Alta de clientes</h2>
+		{% endif %}	  
+	</div>
+	<form class="w3-container w3-card-4" method="post" action="#" id="form_1">
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Nombre</label>
+			<input class="w3-input w3-border" type="text" required="true" id="txt_nombre" name="txt_nombre" {% if resu!=null %} value="{{resu.getNombre()}}" {% endif %}>
+		</div>
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Apellido</label>
+			<input class="w3-input w3-border" type="text" required="true" id="txt_apellido" name="txt_apellido" {% if resu!=null %} value="{{resu.getApellido()}}" {% endif %}>
+		</div>
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">DNI</label>
+			<input class="w3-input w3-border" type="text" required="true" id="txt_dni" name="txt_dni" {% if resu!=null %} value="{{resu.getDni()}}" {% endif %}>
+		</div>	
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Email</label>
+			<input class="w3-input w3-border" type="text" required="true" id="txt_email" name="txt_email" {% if resu!=null %} value="{{resu.getEmail()}}" {% endif %}>
+		</div>
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Dirección</label>
+			<input class="w3-input w3-border" type="text" required="true" id="txt_dir" name="txt_dir" {% if resu!=null %} value="{{resu.getDireccion()}}" {% endif %}>
+		</div>
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Telefono</label>
+			<input class="w3-input w3-border" type="text" required="true" id="txt_tel" name="txt_tel" {% if resu!=null %} value="{{resu.getTelefono()}}" {% endif %}>
+		</div>	
+		<div style="margin-top:15px;margin-bottom:15px;">
+			<button id="btn_enviar" type="button" class="w3-btn w3-padding w3-teal" style="width:120px">Aceptar &rarr;</button>
+		</div>
+	</form>
+</div>

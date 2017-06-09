@@ -1,0 +1,3 @@
+san_jorge:
+    resource: "@SanJorgeBundle/Resources/config/routing.yml"
+    prefix:   /

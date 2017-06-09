@@ -1,0 +1,39 @@
+<div style="margin-top:10px;">
+	<a href="{{path('san_jorge_items',{'mode':'list','id':id})}}" class="link">
+		<b>&larr; Volver</b>
+	</a>
+</div>
+<div style="margin-top:15px;">
+	<div class="w3-container w3-teal">
+		{% if resu!=null %}
+			<h2>Editar item</h2>
+		{% else %}
+			<h2>Alta de item a factura</h2>
+		{% endif %}
+	</div>
+	<form class="w3-container w3-card-4" method="post" action="#">
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Producto</label>
+			<input class="w3-input w3-border" type="text" required="true" name="txt_producto" {% if resu!=null %} value="{{resu.getProducto()}}" {% endif %}>
+		</div>	
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Cantidad</label>
+			<input class="w3-input w3-border" type="text" required="true" name="txt_cantidad" {% if resu!=null %} value="{{resu.getCantidad()}}" {% endif %}>
+		</div>
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Costo unitario</label>
+			<input class="w3-input w3-border" type="text" required="true" name="txt_unit" {% if resu!=null %} value="{{resu.getCostoUnitario()}}" {% endif %}>
+		</div>
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Total de impuestos</label>
+			<input class="w3-input w3-border" type="text" required="true" name="txt_imp" {% if resu!=null %} value="{{resu.getImpuestos()}}" {% endif %}>
+		</div>		
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Costo total</label>
+			<input class="w3-input w3-border" type="text" required="true" name="txt_total" {% if resu!=null %} value="{{resu.getCostoTotal()}}" {% endif %}>
+		</div>	
+		<div style="margin-top:15px;margin-bottom:15px;">
+			<button type="submit" class="w3-btn w3-padding w3-teal" style="width:120px">Aceptar &rarr;</button></p>
+		</div>
+	</form>
+</div>

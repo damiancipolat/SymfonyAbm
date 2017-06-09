@@ -1,0 +1,24 @@
+<div style="margin-top:10px;">
+	<a href="{{path('san_jorge_facturas',{'mode':'list','id':'0'})}}" class="link">
+		<b>&larr; Volver</b>
+	</a>
+</div>
+<div style="margin-top:15px;">
+	<div class="w3-container w3-teal">
+		<h2>Alta de factura</h2> 
+	</div>
+	<form class="w3-container w3-card-4" method="post" action="#">
+		<div style="margin-top:5px;">
+			<label class="w3-text-grey">Elegir cliente:</label>
+			<br>
+			<select name="txt_cliente" style="padding:5px;margin-top:10px;">
+				{% for cliente in resu %}
+					<option value="{{cliente.getId()}}">{{cliente.getDni()~' / '~cliente.getNombre()~' '~cliente.getApellido()}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div style="margin-top:15px;margin-bottom:15px;">
+			<button type="submit" class="w3-btn w3-padding w3-teal" style="width:120px">Aceptar &rarr;</button></p>
+		</div>
+	</form>
+</div>

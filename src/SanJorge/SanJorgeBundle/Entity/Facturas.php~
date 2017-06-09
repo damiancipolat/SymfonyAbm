@@ -1,0 +1,39 @@
+<?php
+
+namespace SanJorge\SanJorgeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Facturas
+ *
+ * @ORM\Table(name="facturas")
+ * @ORM\Entity
+ */
+class Facturas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha", type="datetime", nullable=true)
+     */
+    private $fecha;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idcliente", type="bigint", nullable=true)
+     */
+    private $idcliente;
+
+
+}
